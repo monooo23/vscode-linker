@@ -1,0 +1,233 @@
+[
+  {
+    "name": "GitHub Repository",
+    "type": "url",
+    "target": "https://github.com/example/linker-extension",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "github.com/example/linker-extension",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open GitHub repository",
+    "showCodeLens": true
+  },
+  {
+    "name": "Configuration File",
+    "type": "file",
+    "target": "${workspaceFolder}/package.json",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "package.json",
+        "fileExtensions": [".js", ".ts", ".json", ".md"]
+      }
+    ],
+    "description": "Open package.json file",
+    "showCodeLens": false
+  },
+  {
+    "name": "README File",
+    "type": "file",
+    "target": "${workspaceFolder}/README.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "README.md",
+        "fileExtensions": [".js", ".ts", ".json", ".md"]
+      }
+    ],
+    "description": "Open README file"
+  },
+  {
+    "name": "NPM Install",
+    "type": "command",
+    "target": "workbench.action.terminal.sendSequence",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "npm install",
+        "fileExtensions": [".js", ".ts", ".json"]
+      }
+    ],
+    "description": "Run npm install command"
+  },
+  {
+    "name": "NPM Test",
+    "type": "command",
+    "target": "workbench.action.terminal.sendSequence",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "npm test",
+        "fileExtensions": [".js", ".ts", ".json"]
+      }
+    ],
+    "description": "Run npm test command"
+  },
+  {
+    "name": "Email Address",
+    "type": "url",
+    "target": "mailto:${1}",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open email client"
+  },
+  {
+    "name": "HTTP URL",
+    "type": "url",
+    "target": "${1}",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "https?://[^\\s]+",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open HTTP/HTTPS URL"
+  },
+  {
+    "name": "TODO Comment",
+    "type": "command",
+    "target": "workbench.action.quickOpen",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "TODO:",
+        "fileExtensions": [".js", ".ts", ".py", ".java", ".cpp", ".c"]
+      }
+    ],
+    "description": "Search for TODO comments"
+  },
+  {
+    "name": "Error Line",
+    "type": "file",
+    "target": "${workspaceFolder}/src/error.ts:42",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "error\\.ts:(\\d+)",
+        "fileExtensions": [".js", ".ts"]
+      }
+    ],
+    "description": "Jump to error line"
+  },
+  {
+    "name": "Hover Test",
+    "type": "url",
+    "target": "https://example.com/hover-test",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "hover-test",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Test hover functionality"
+  },
+  {
+    "name": "Langgraph.json",
+    "type": "file",
+    "target": "${workspaceFolder}/src/prompts/templates/${1}.md:100",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "call\\('([^']+)'",
+        "caseSensitive": true,
+        "highlightGroup": 1
+      }
+    ],
+    "description": "Open prompt template file"
+  },
+  {
+    "name": "API Endpoint",
+    "type": "url",
+    "target": "https://api.example.com/users/${1}",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "/api/users/([^/]+)",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open API endpoint documentation"
+  },
+  {
+    "name": "Component File",
+    "type": "file",
+    "target": "${workspaceFolder}/src/components/${1}.js",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "require\\('\\./components/([^']+)\\.js'\\)",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open component file"
+  },
+  {
+    "name": "Text File Test",
+    "type": "file",
+    "target": "${workspaceFolder}/README.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "README.md",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Test text file opening in editor"
+  },
+  {
+    "name": "Binary File Test",
+    "type": "file",
+    "target": "${workspaceFolder}/test-image.png",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "test-image.png",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Test binary file opening with system app"
+  },
+  {
+    "name": "API Documentation",
+    "type": "url",
+    "target": "https://code.visualstudio.com/api",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "VSCode API",
+        "caseSensitive": false,
+        "context": {
+          "before": "See ",
+          "after": " for more details"
+        }
+      }
+    ],
+    "description": "Open VSCode API documentation",
+    "showCodeLens": true
+  },
+  {
+    "name": "Custom Icon Example",
+    "type": "command",
+    "target": "workbench.action.quickOpen",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "custom-command",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Example with custom icon",
+    "icon": "🚀",
+    "showCodeLens": true
+  }
+]

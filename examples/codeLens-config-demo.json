@@ -1,0 +1,43 @@
+[
+  {
+    "name": "GitHub Repository",
+    "type": "url",
+    "target": "https://github.com/example/repo",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "github.com/example/repo",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open GitHub repository",
+    "showCodeLens": true
+  },
+  {
+    "name": "Configuration File",
+    "type": "file",
+    "target": "${workspaceFolder}/package.json",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "package.json",
+        "fileExtensions": [".js", ".ts", ".json", ".md"]
+      }
+    ],
+    "description": "Open package.json file",
+    "showCodeLens": false
+  },
+  {
+    "name": "README File",
+    "type": "file",
+    "target": "${workspaceFolder}/README.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "README.md",
+        "fileExtensions": [".js", ".ts", ".json", ".md"]
+      }
+    ],
+    "description": "Open README file"
+  }
+]

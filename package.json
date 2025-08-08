@@ -1,0 +1,182 @@
+{
+  "name": "linker",
+  "displayName": "Linker - Smart Code Linking",
+  "description": "Transform your code into an interactive experience! Create clickable links in your code that navigate to documentation, files, APIs, and more. Supports regex patterns, inline comments, and flexible configuration.",
+  "version": "0.0.22",
+  "publisher": "sharten",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monooo23/vscode-linker"
+  },
+  "homepage": "https://github.com/monooo23/vscode-linker#readme",
+  "bugs": {
+    "url": "https://github.com/monooo23/vscode-linker/issues"
+  },
+  "license": "MIT",
+  "tags": [
+    "link",
+    "navigation",
+    "productivity",
+    "documentation",
+    "api",
+    "regex",
+    "interactive"
+  ],
+  "engines": {
+    "vscode": "^1.74.0",
+    "node": ">=20.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "link",
+    "url",
+    "file",
+    "navigation",
+    "code-linking",
+    "documentation",
+    "api",
+    "regex",
+    "clickable",
+    "interactive",
+    "productivity",
+    "developer-tools",
+    "code-navigation",
+    "inline-links",
+    "smart-links",
+    "code-references",
+    "documentation-links",
+    "api-documentation",
+    "file-navigation",
+    "code-search",
+    "development-tools"
+  ],
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#0066cc",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "files": [
+    "out/**/*",
+    "images/**/*",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "linker.openLink",
+        "title": "Open Link",
+        "category": "Linker"
+      },
+      {
+        "command": "linker.configureLinks",
+        "title": "Configure Links",
+        "category": "Linker"
+      },
+      {
+        "command": "linker.reloadConfig",
+        "title": "Reload Link Configuration",
+        "category": "Linker"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "linker.openLink",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "linker.openLink",
+          "group": "navigation",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Linker - Smart Code Linking",
+      "properties": {
+        "linker.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the Linker extension globally"
+        },
+        "linker.configPath": {
+          "type": "string",
+          "default": ".vscode/linker.json",
+          "description": "Path to the linker configuration file relative to workspace root"
+        },
+        "linker.autoReload": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically reload configuration when the config file changes"
+        },
+        "linker.enableCodeLens": {
+          "type": "boolean",
+          "default": false,
+          "description": "Default CodeLens setting for rules that don't specify showCodeLens. Individual rules can override this with their own showCodeLens property."
+        },
+        "linker.enableHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show hover tooltips when hovering over linked text"
+        },
+        "linker.enableDecorations": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show visual decorations (underlines) for matched links in the editor"
+        },
+        "linker.enableInlineLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable inline link support using @link comments (e.g., @link [#anchor](url))"
+        },
+        "linker.inlineLinkPattern": {
+          "type": "string",
+          "default": "@link\\s+\\[#(?<anchor>.+?)\\]\\((?<link>.+?)\\)",
+          "description": "Custom regex pattern for inline links. Must include named groups 'anchor' and 'link'"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "test:unit": "node ./out/test/runTest.js --grep \"Test Suite\"",
+    "test:integration": "node ./out/test/runTest.js --grep \"Integration\"",
+    "test:compile": "tsc -p ./ && node ./out/test/runTest.js",
+    "test:watch": "npm run compile && node ./out/test/runTest.js --watch",
+    "package": "node package-vsix.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^24.2.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^3.0.0",
+    "eslint": "^9.32.0",
+    "glob": "^11.0.3",
+    "mocha": "^11.7.1",
+    "typescript": "^5.9.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

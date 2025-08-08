@@ -1,0 +1,151 @@
+{
+  "links": [
+    {
+      "name": "JavaScript Documentation",
+      "type": "url",
+      "target": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/${text}",
+      "description": "MDN JavaScript documentation",
+      "patterns": [
+        {
+          "type": "text",
+          "value": "Array",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"]
+        },
+        {
+          "type": "text",
+          "value": "Object",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"]
+        },
+        {
+          "type": "text",
+          "value": "String",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"]
+        }
+      ]
+    },
+    {
+      "name": "React Documentation",
+      "type": "url",
+      "target": "https://react.dev/reference/react/${text}",
+      "description": "React official documentation",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "use[A-Z][a-zA-Z]*",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"],
+          "highlightGroup": 0
+        },
+        {
+          "type": "text",
+          "value": "useState",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"]
+        },
+        {
+          "type": "text",
+          "value": "useEffect",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"]
+        }
+      ]
+    },
+    {
+      "name": "File Navigation",
+      "type": "file",
+      "target": "./src/${text}.ts",
+      "description": "Navigate to source files",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "import\\s+.*\\s+from\\s+['\"]([^'\"]+)['\"]",
+          "fileExtensions": ["js", "ts", "jsx", "tsx"],
+          "highlightGroup": 1,
+          "context": {
+            "before": "import",
+            "after": "from"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inline Links",
+      "type": "url",
+      "target": "https://example.com/${1}",
+      "description": "Inline markdown-style links",
+      "patterns": [
+        {
+          "type": "text",
+          "value": "inline",
+          "context": {
+            "before": "// ",
+            "after": "\n"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Function Documentation",
+      "type": "url",
+      "target": "https://docs.example.com/functions/${1}",
+      "description": "Function documentation",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "function\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+          "fileExtensions": ["js", "ts"],
+          "highlightGroup": 1
+        },
+        {
+          "type": "regex",
+          "value": "const\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*=\\s*\\([^)]*\\)\\s*=>",
+          "fileExtensions": ["js", "ts"],
+          "highlightGroup": 1
+        }
+      ]
+    },
+    {
+      "name": "API Documentation",
+      "type": "url",
+      "target": "https://api.example.com/v1/${text}",
+      "description": "API endpoint documentation",
+      "patterns": [
+        {
+          "type": "text",
+          "value": "GET",
+          "caseSensitive": true
+        },
+        {
+          "type": "text",
+          "value": "POST",
+          "caseSensitive": true
+        },
+        {
+          "type": "text",
+          "value": "PUT",
+          "caseSensitive": true
+        },
+        {
+          "type": "text",
+          "value": "DELETE",
+          "caseSensitive": true
+        }
+      ]
+    },
+    {
+      "name": "Error Codes",
+      "type": "url",
+      "target": "https://errors.example.com/${text}",
+      "description": "Error code documentation",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "Error\\s*:\\s*([A-Z0-9_]+)",
+          "highlightGroup": 1
+        },
+        {
+          "type": "regex",
+          "value": "throw\\s+new\\s+Error\\(['\"]([^'\"]+)['\"]\\)",
+          "highlightGroup": 1
+        }
+      ]
+    }
+  ]
+}

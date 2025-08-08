@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Workspace Variables Demo",
+    "type": "file",
+    "target": "${workspaceFolder}/docs/${workspaceFolderBasename}-guide.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "workspace-guide",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open workspace-specific documentation"
+  },
+  {
+    "name": "File Path Variables Demo",
+    "type": "file",
+    "target": "${fileDirname}/tests/${fileBasename}.test.${fileExtname}",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "test-file",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open corresponding test file"
+  },
+  {
+    "name": "Relative File Variables Demo",
+    "type": "file",
+    "target": "${workspaceFolder}/docs/${relativeFile}.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "relative-doc",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open documentation for current file"
+  },
+  {
+    "name": "Line Number Demo",
+    "type": "file",
+    "target": "${workspaceFolder}/error-log.md:${lineNumber}",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "log-error",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Log error at current line"
+  },
+  {
+    "name": "Selected Text Demo",
+    "type": "url",
+    "target": "https://www.google.com/search?q=${selectedText}",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "search",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Search selected text on Google"
+  },
+  {
+    "name": "System Variables Demo",
+    "type": "file",
+    "target": "${userHome}/.vscode/snippets/${fileBasename}.json",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "snippet",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Open user snippets for current file"
+  },
+  {
+    "name": "Environment Variables Demo",
+    "type": "url",
+    "target": "https://${env:API_HOST}/docs/${1}",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "api/(\\w+)",
+        "caseSensitive": false,
+        "highlightGroup": 1
+      }
+    ],
+    "description": "Open API documentation using environment variable"
+  },
+  {
+    "name": "Regex Capture Groups Demo",
+    "type": "file",
+    "target": "${workspaceFolder}/src/components/${1}/${2}.tsx",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "import\\s+\\w+\\s+from\\s+['\"]\\./components/(\\w+)/(\\w+)['\"]",
+        "caseSensitive": false,
+        "highlightGroup": 1
+      }
+    ],
+    "description": "Open component file using regex capture groups"
+  },
+  {
+    "name": "Complex Variable Demo",
+    "type": "file",
+    "target": "${workspaceFolder}/docs/${relativeFileDirname}/${fileBasename}-${lineNumber}.md",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "complex-link",
+        "caseSensitive": false
+      }
+    ],
+    "description": "Complex example combining multiple variables"
+  }
+]
