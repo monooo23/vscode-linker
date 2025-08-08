@@ -1,0 +1,60 @@
+// 这个文件演示了各种可以被 jsonrepair 自动修复的 JSON 格式问题
+// 正常情况下这个文件无法被 JSON.parse() 解析，但 jsonrepair 可以修复它
+
+[
+  // 1. 缺少引号的属性名
+  {
+    name: "GitHub Repository",  // 应该用双引号
+    type: "url",
+    target: "https://github.com/example/repo",
+    patterns: [
+      {
+        type: "text",
+        value: "github.com/example/repo",
+        caseSensitive: false,
+      },  // 2. 尾随逗号
+    ],
+  },  // 3. 另一个尾随逗号
+
+  // 4. 使用单引号而不是双引号
+  {
+    'name': 'Config File',
+    'type': 'file',
+    'target': '${workspaceFolder}/config.json',
+    'patterns': [
+      {
+        'type': 'text',
+        'value': 'config.json',
+        'fileExtensions': ['.js', '.ts', '.json'],
+      },
+    ],
+  },
+
+  // 5. 缺少闭合括号的数组
+  {
+    "name": "API Documentation",
+    "type": "url",
+    "target": "https://api.example.com/docs",
+    "patterns": [
+      {
+        "type": "regex",
+        "value": "api\\.example\\.com",
+        "caseSensitive": false
+      }
+    ]  // 缺少闭合的 ]
+  },  // 6. 缺少闭合的 }
+
+  // 7. 混合格式问题
+  {
+    name: 'Mixed Issues',
+    'type': 'file',
+    "target": "${workspaceFolder}/src/main.ts",
+    patterns: [
+      {
+        type: "text",
+        'value': 'main.ts',
+        fileExtensions: ['.ts', '.js'],
+      },
+    ],
+  },
+]  // 8. 文件末尾缺少闭合括号
