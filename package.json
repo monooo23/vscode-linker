@@ -2,7 +2,7 @@
   "name": "linker",
   "displayName": "Linker - Smart Code Linking",
   "description": "Transform your code into an interactive experience! Create clickable links in your code that navigate to documentation, files, APIs, and more. Supports regex patterns, inline comments, and flexible configuration.",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "publisher": "sharten",
   "repository": {
     "type": "git",
@@ -178,5 +178,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "dependencies": {}
 }

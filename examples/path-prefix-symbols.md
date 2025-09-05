@@ -1,29 +1,29 @@
-# 路径前缀符号设计说明
+# Path Prefix Symbols Design
 
-## 符号选择理由
+## Symbol Selection Rationale
 
-我们选择了以下符号来表示不同的相对路径基准，这些符号非常直观：
+We have chosen the following symbols to represent different relative path baselines, which are very intuitive:
 
-### 📁 `#:` - 项目根目录
-- `#` 代表"根"或"主要"，类似于 Git 中的 `#` 表示主分支
-- 例如：`#:package.json` → 项目根目录下的 package.json
+### 📁 `#:` - Project Root Directory
+- `#` represents "root" or "main", similar to how `#` in Git represents the main branch
+- Example: `#:package.json` → package.json in the project root directory
 
-### 📂 `~:` - 当前文件目录
-- `~` 在 Unix 系统中表示用户主目录，这里扩展为"当前目录"
-- 例如：`~:helper.ts` → 当前文件同目录下的 helper.ts
+### 📂 `~:` - Current File Directory
+- `~` in Unix systems represents the user home directory, here extended to mean "current directory"
+- Example: `~:helper.ts` → helper.ts in the same directory as the current file
 
-### ⬆️ `<:` - 上级目录
-- `<` 符号直观地表示"向上"或"父级"
-- 例如：`<:../utils.ts` → 当前文件上级目录下的 utils.ts
+### ⬆️ `<:` - Parent Directory
+- `<` symbol intuitively represents "up" or "parent"
+- Example: `<:../utils.ts` → utils.ts in the parent directory of the current file
 
-### ⬇️ `>:` - 下级目录
-- `>` 符号直观地表示"向下"或"子级"
-- 例如：`>:components/Button.tsx` → 当前文件下级目录中的组件
+### ⬇️ `>:` - Child Directory
+- `>` symbol intuitively represents "down" or "child"
+- Example: `>:components/Button.tsx` → components in the child directory of the current file
 
-## 文件系统层级关系
+## File System Hierarchy
 
 ```
-项目根目录 (#:)
+Project Root Directory (#:)
 ├── package.json (#:package.json)
 ├── README.md (#:README.md)
 ├── src/
@@ -38,35 +38,35 @@
     └── api.md (<:../docs/api.md)
 ```
 
-## 使用示例
+## Usage Examples
 
 ```typescript
-// 在 src/components/Button.tsx 文件中：
+// In src/components/Button.tsx file:
 
-// 引用项目根目录的文件
+// Reference files from project root directory
 // @link [#package](#:package.json)
 // @link [#readme](#:README.md)
 
-// 引用当前目录的文件
+// Reference files from current directory
 // @link [#helper](~:helper.ts)
 // @link [#utils](~:utils/index.ts)
 
-// 引用上级目录的文件
+// Reference files from parent directory
 // @link [#parent](<:../parent.ts)
 // @link [#shared](<:../shared/utils.ts)
 
-// 引用下级目录的文件
+// Reference files from child directory
 // @link [#modal](>:Modal.tsx)
 // @link [#service](>:services/api.ts)
 ```
 
-## 符号的直观性
+## Symbol Intuitiveness
 
-这些符号的选择基于以下原则：
+The selection of these symbols is based on the following principles:
 
-1. **视觉直观性**：`<` 和 `>` 符号直接对应文件系统的层级关系
-2. **语义清晰性**：每个符号都有明确的含义和用途
-3. **易于记忆**：符号与功能直接关联，容易记住
-4. **避免冲突**：选择的符号不会与常见的文件路径字符冲突
+1. **Visual Intuitiveness**: `<` and `>` symbols directly correspond to file system hierarchy relationships
+2. **Semantic Clarity**: Each symbol has a clear meaning and purpose
+3. **Easy to Remember**: Symbols are directly associated with their functions, making them easy to remember
+4. **Conflict Avoidance**: The chosen symbols don't conflict with common file path characters
 
-这种设计让开发者能够一眼就看出路径的基准位置，大大提高了代码的可读性和维护性！
+This design allows developers to immediately understand the baseline position of paths at a glance, greatly improving code readability and maintainability!

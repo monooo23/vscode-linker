@@ -28,6 +28,7 @@ A powerful VSCode extension that transforms your code into an interactive naviga
 - Support [VS Code variables](https://code.visualstudio.com/docs/editor/variables-reference) and environment variables
 - Variable substitution with regex capture groups
 - Custom path prefixes for flexible file navigation
+- **JSON Auto-Repair**: Automatically fixes common JSON syntax errors in configuration files
 
 ## 🚀 Quick Start
 
@@ -83,6 +84,61 @@ Your code will automatically show clickable links. Hover to preview, Ctrl+Click 
 - Any occurrence of `E101:` will become clickable and link to line 101 in `./docs/errors.md`
 
 **🔄 Configuration Reload**: The extension automatically reloads configuration when you save the `.vscode/linker.json` file. If changes don't take effect, you can manually run the **"Reload Link Configuration"** command from the command palette (Ctrl+Shift+P).
+
+**🔧 JSON Auto-Repair**: The extension automatically detects and fixes common JSON syntax errors in your configuration file, such as trailing commas, missing quotes, and comments. You'll be notified when repairs are made and can choose to save the corrected format.
+
+## 🔧 JSON Auto-Repair
+
+The extension automatically fixes common JSON syntax errors in your `linker.json` configuration file. This prevents configuration failures due to minor formatting issues.
+
+### Supported Repairs
+
+- **Trailing Commas**: Removes extra commas at the end of arrays and objects
+- **Missing Quotes**: Adds quotes around property names and string values
+- **Comments**: Removes JavaScript-style comments (`//` and `/* */`)
+- **Single Quotes**: Converts single quotes to double quotes
+- **Missing Brackets**: Adds missing closing brackets and braces
+- **Mixed Quotes**: Standardizes quote usage throughout the file
+
+### Example
+
+**Before (Invalid JSON):**
+```json
+[
+  {
+    name: "GitHub Repository",  // Missing quotes
+    type: "url",
+    target: "https://github.com/example/repo",
+    patterns: [
+      {
+        type: "text",
+        value: "github.com/example/repo",
+        caseSensitive: false,
+      },  // Trailing comma
+    ],
+  },  // Another trailing comma
+]
+```
+
+**After (Automatically Repaired):**
+```json
+[
+  {
+    "name": "GitHub Repository",
+    "type": "url",
+    "target": "https://github.com/example/repo",
+    "patterns": [
+      {
+        "type": "text",
+        "value": "github.com/example/repo",
+        "caseSensitive": false
+      }
+    ]
+  }
+]
+```
+
+When the extension detects and repairs JSON issues, you'll see a notification asking if you want to save the corrected format. Click "Save" to save the repaired version to disk.
 
 ## 📝 Configuration Examples
 

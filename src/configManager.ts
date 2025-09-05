@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import { jsonrepair } from './jsonRepair';
 import { LinkConfig, WorkspaceConfig } from './types';
 
 // Event emitter for configuration changes
@@ -31,6 +32,12 @@ export class ConfigManager {
       // Fallback to user's home directory if no workspace is open
       const homeDir = process.env.HOME || process.env.USERPROFILE || process.cwd();
       defaultConfigPath = path.join(homeDir, '.vscode', 'linker.json');
+    }
+
+    // Log the config path for debugging
+    if (this.workspaceConfig?.debug) {
+      console.log('Config path resolved:', defaultConfigPath);
+      console.log('Workspace folder:', workspaceFolder?.uri.fsPath);
     }
 
     return {
@@ -76,11 +83,49 @@ export class ConfigManager {
       }
 
       let parsedConfig;
+      let originalContent = configContent;
+      let wasRepaired = false;
+      
       try {
         parsedConfig = JSON.parse(configContent);
       } catch (parseError) {
-        vscode.window.showErrorMessage(`Invalid JSON format in linker configuration file: ${parseError}`);
-        return [];
+        // Try to repair the JSON using jsonrepair
+        try {
+          const repairedContent = jsonrepair(configContent);
+          parsedConfig = JSON.parse(repairedContent);
+          wasRepaired = true;
+          
+          // Show simple notification about the repair
+          vscode.window.showInformationMessage(
+            `Configuration file format is incorrect. Auto-repaired. Save the corrected format?`,
+            'Save'
+          ).then(async (selection) => {
+            if (selection === 'Save') {
+              try {
+                const repairedContent = jsonrepair(originalContent);
+                fs.writeFileSync(this.configPath, repairedContent);
+                vscode.window.showInformationMessage('Configuration file saved with correct format.');
+              } catch (saveError) {
+                console.error('Failed to save repaired configuration:', saveError);
+                vscode.window.showErrorMessage(`Failed to save configuration file: ${saveError}`);
+              }
+            }
+          });
+          
+          // Log the repair details for debugging
+          if (this.workspaceConfig.debug) {
+            console.log('JSON Repair Details:');
+            console.log('Config Path:', this.configPath);
+            console.log('Original:', originalContent);
+            console.log('Repaired:', repairedContent);
+            console.log('Parse Error:', parseError);
+          }
+        } catch (repairError) {
+          vscode.window.showErrorMessage(
+            `Failed to parse linker configuration JSON. The file contains syntax errors that cannot be automatically repaired.\n\nError: ${parseError}\n\nPlease fix the JSON syntax manually.`
+          );
+          return [];
+        }
       }
 
       // Handle configuration format
@@ -102,8 +147,13 @@ export class ConfigManager {
         return [];
       }
       
+      // Note: JSON repair save logic is handled in the notification above
+      
       if (this.workspaceConfig.debug) {
         console.log(`Loaded ${this.config.length} link configurations`);
+        if (wasRepaired) {
+          console.log('Configuration was loaded from repaired JSON');
+        }
       }
 
       return this.config;

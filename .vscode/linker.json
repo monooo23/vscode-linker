@@ -134,7 +134,7 @@
   {
     "name": "Langgraph.json",
     "type": "file",
-    "target": "${workspaceFolder}/src/prompts/templates/${1}.md:100",
+    "target": "${workspaceFolder}/src/doc/${1}.md:100",
     "patterns": [
       {
         "type": "regex",

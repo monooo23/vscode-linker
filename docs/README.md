@@ -15,6 +15,9 @@ Welcome to the Linker extension documentation! This directory contains detailed 
 - **[Variable Support Demo](../examples/variable-support-demo.json)** - Configuration examples for all variables
 - **[CodeLens Config Demo](../examples/codeLens-config-demo.json)** - CodeLens configuration examples
 - **[Auto-Reload Demo](../examples/auto-reload-demo.md)** - Auto-reload configuration demonstration
+- **[JSON Repair Demo](../examples/json-repair-demo.md)** - JSON auto-repair feature demonstration
+- **[JSON Repair Examples](../examples/json-repair-demo.json)** - Examples of JSON syntax errors that can be auto-repaired
+
 
 ### Development
 - **[Test Summary](../TEST_SUMMARY.md)** - Current test status and development progress
@@ -33,6 +36,7 @@ Welcome to the Linker extension documentation! This directory contains detailed 
 - **Regex Capture Groups**: Dynamic link generation with pattern matching
 - **File Navigation**: Smart file detection and line/column positioning
 - **Flexible CodeLens**: Rule-specific CodeLens settings override global configuration
+- **JSON Auto-Repair**: Automatically fixes common JSON syntax errors in configuration files
 
 ## 📖 Getting Started
 
